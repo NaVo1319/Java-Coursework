@@ -7,17 +7,22 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.mirea.cursework.entity.User;
 
+import java.util.ArrayList;
+
 @Controller
 public class HomeController {
+    ArrayList<User> users=new ArrayList<>();
     @GetMapping("/")
-    public String greetingForm(Model model) {
+    public String getHome(Model model) {
         model.addAttribute("user", new User());
         return "home";
     }
 
     @PostMapping("/")
-    public String greetingSubmit(@ModelAttribute User uer, Model model) {
-        model.addAttribute("user", uer);
+    public String postHome(@ModelAttribute User user, Model model) {
+        model.addAttribute("user", user);
+        users.add(user);
+        System.out.println(users);
         return "result";
     }
 }

@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'ru.mirea'
-version = '0.0.1-SNAPSHOT'
+version = '1.0'
 sourceCompatibility = '11'
 
 configurations {
@@ -29,5 +29,18 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
+}
+jar {
+    manifest {
+        attributes 'Main-Class': 'ru.mirea.cursework.CurseWorkApplication'
+    }
+    finalizedBy{
+        copyJar
+    }
+
+}
+task copyJar(type: Copy){
+    from jar
+    into ('Result')
 }
 
