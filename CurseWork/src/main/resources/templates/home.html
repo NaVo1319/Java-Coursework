@@ -1,14 +1,15 @@
 <!DOCTYPE HTML>
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
-  <title>Getting Started: Handling Form Submission</title>
+  <title>PaintBall</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<form action="#" th:action="@{/}" th:object="${user}" method="post">
-  <p>Id: <input type="text" th:field="*{id}" /></p>
-  <p>Message: <input type="text" th:field="*{content}" /></p>
+<form action="/" method="post">
+  <p>Username: <input type="text" name="name" /></p>
+  <p>Content: <input type="text" name="Content" /></p>
   <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+  <a href="http://localhost:8081/users">Список пользователей</a>
 </form>
 </body>
 </html>
