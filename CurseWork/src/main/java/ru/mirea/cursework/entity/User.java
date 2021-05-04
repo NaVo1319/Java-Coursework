@@ -22,6 +22,8 @@ public class User {
     private boolean active;
     @Column(name = "email")
     private String email;
-    @Column(name = "role")
-    private String role;
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_role",joinColumns = @JoinColumn(name = "user_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<Role> roles;
 }

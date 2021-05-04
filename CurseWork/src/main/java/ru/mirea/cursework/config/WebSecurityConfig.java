@@ -25,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/","/registration","/users","/user").permitAll()
+                    .antMatchers("/","/registration","/messages").permitAll()
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
@@ -33,15 +33,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .permitAll()
                 .and()
                     .logout()
-                    .permitAll();
+                    .permitAll()
+                .and()
+                    .csrf()
+                        .disable();
     }
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
                 .passwordEncoder(NoOpPasswordEncoder.getInstance())
-                .usersByUsernameQuery("select username, password, active from users where username=?");
-                //.authoritiesByUsernameQuery("select username, role from user_role where username=?");
+                .usersByUsernameQuery("select username, password, active from users where username=?")
+                .authoritiesByUsernameQuery("select u.username, ur.roles from users u inner join user_role ur on u.id=ur.user_id where u.username=?");
     }
 }
 //"select u.username, ur.roles from users u inner join user_role ur on u.id=ur.user_id where u.username=?"

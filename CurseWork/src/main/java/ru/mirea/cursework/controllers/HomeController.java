@@ -17,12 +17,14 @@ public class HomeController {
     @GetMapping("/")
     public String getHome(Model model) {
         model.addAttribute("user", new User());
+        System.out.println("HOME");
         return "home";
     }
     @GetMapping("/users")
     public String getUsers(Model model){
         Iterable<User> users= userRepo.findAll();
         model.addAttribute("users", users);
+        System.out.println("USERS");
         return "users";
     }
 }

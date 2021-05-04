@@ -6,7 +6,8 @@
 </head>
 <body>
 <div th:text="${messageRegistration}"></div>
-<form action="/" method="post">
+<form method="post">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
     <p>Login: <input type="text" name="username" /></p>
     <p>email: <input type="text" name="email" /></p>
     <p>Password: <input type="text" name="password"></p>

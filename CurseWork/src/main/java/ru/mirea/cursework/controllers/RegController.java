@@ -18,22 +18,25 @@ public class RegController {
     private UserRepo userRepo;
     @GetMapping("/registration")
     public String getReg() {
+
+        System.out.println("REGISTRATION");
         return "registration";
     }
-    @PostMapping(name = "/registration")
+    @PostMapping("/registration")
     public  String postReg(Model model, User user, @RequestParam(name = "username") String username,@RequestParam(name = "password") String password,
                            @RequestParam(name = "email") String email ){
-        User UserDB = userRepo.findByUsername(user.getUsername());
+        User UserDB = userRepo.findByUsername(username);
         if (UserDB!=null){
             model.addAttribute("messageRegistration","Пользователь уже существует");
             return "registration";
         }
         user.setActive(true);
-        user.setRole("USER");
+        user.setRoles(Collections.singleton(Role.USER));
         user.setUsername(username);
         user.setPassword(password);
         user.setEmail(email);
         userRepo.save(user);
+        System.out.println("POST REGISTRATION");
         return "redirect:/";
     }
 }
