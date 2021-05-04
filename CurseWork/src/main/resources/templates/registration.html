@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>PaintBall</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div th:text="${messageRegistration}"></div>
+<form action="/" method="post">
+    <p>Login: <input type="text" name="username" /></p>
+    <p>email: <input type="text" name="email" /></p>
+    <p>Password: <input type="text" name="password"></p>
+    <p>Retry Password: <input type="text" name="retry password"></p>
+    <p><input type="submit" value="Регистрация" /></p>
+    <a href="http://localhost:8081/users">Список пользователей</a>
+</form>
+</body>
+</html>

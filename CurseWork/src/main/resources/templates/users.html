@@ -8,9 +8,8 @@
 <a href="/">Назад</a>
 <h2>Список пользователей</h2>
 <div th:each="element : ${users}">
-    <h3 th:text="${element.name}"></h3>
-    <div th:text="${element.content}"></div>
-    <a th:href="${element.id}">Профиль</a>
+    <h3><div th:text="${element.id}"></div><div th:text="${element.username}"></div></h3>
+    <p th:text="${element.email}"></p>
 </div>
 </form>
 </body>
