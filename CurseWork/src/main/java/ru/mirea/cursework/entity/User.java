@@ -1,17 +1,18 @@
 package ru.mirea.cursework.entity;
 
 import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Set;
 
 @Entity
 @Table(schema = "public",name = "users")
 @Data
-public class User {
+public class User implements UserDetails {
     @Id
-    //@SequenceGenerator(name="users_generator", sequenceName="users_id_seq", allocationSize=1)
-    //@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="users_generator")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column(name = "username")
@@ -26,4 +27,29 @@ public class User {
     @CollectionTable(name = "user_role",joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return active;
+    }
 }

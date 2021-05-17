@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="https://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
   <title>PaintBall</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -7,10 +7,16 @@
 <body>
 <h>PAINTBALL</h>
 <p>Это главная страница</p>
-<p><<<<<a href="/login">Логин</a></p>
+<div th:if="${user}==null"><p><<<<<a href="/login">Логин</a></p></div>
 <p><<<<a href="/registration">Регистрация</a></p>
-<p><<<<a href="/users">Список пользователей</a></p>
+<p th:if="${user}!=null"><<<<a href="/users">Список пользователей</a></p>
 <p><<<<a href="/messages">Сообщения</a></p>
-<p><<<<a href="/logout">Log Out</a></p>
+<p th:if="${user}!=null"><<<<a href="/profile">Профиль</a></p>
+<div sec:authorize="isAuthenticated()" th:if="${user}!=null">
+  <a href="javascript: document.logoutForm.submit()" class="dropdown-toggle">Sign out</a>
+  <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+    <input hidden type="submit" value="Sign Out" />
+  </form>
+</div>
 </body>
 </html>

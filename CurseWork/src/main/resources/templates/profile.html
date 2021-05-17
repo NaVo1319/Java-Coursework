@@ -5,9 +5,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<form action="/" method="post">
-<h>Профиль</h>
-    <p>Кароче будет страничка</p>
-</form>
+<a href="/">Назад</a>
+<h>Профиль: <div th:text="${user.username}"></div></h>
+    <p th:text="${user.email}"></p>
+    <p th:text="${user.active}"></p>
 </body>
 </html>
