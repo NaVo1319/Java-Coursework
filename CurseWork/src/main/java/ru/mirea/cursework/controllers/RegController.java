@@ -18,8 +18,6 @@ public class RegController {
     private UserRepo userRepo;
     @GetMapping("/registration")
     public String getReg() {
-
-        System.out.println("REGISTRATION");
         return "registration";
     }
     @PostMapping("/registration")
@@ -36,7 +34,6 @@ public class RegController {
         user.setPassword(password);
         user.setEmail(email);
         userRepo.save(user);
-        System.out.println("POST REGISTRATION");
         return "redirect:/";
     }
 }

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import ru.mirea.cursework.entity.User;
 
 @Controller
-public class Profile {
+public class ProfileController {
     @GetMapping("/profile")
     public String getProfile(Model model, @AuthenticationPrincipal User user){
         model.addAttribute("user",user);
